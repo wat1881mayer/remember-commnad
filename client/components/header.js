@@ -20,7 +20,7 @@ const Header = ({ currentUser }) => {
     });
 
   return (
-    <nav className="container p-6 mx-auto lg:flex lg:justify-between lg:items-center">
+    <nav className="p-6 shadow lg:flex lg:w-full lg:justify-between lg:items-center">
       <div className="flex items-center justify-between">
         <div>
           <Link href="/">
@@ -52,25 +52,31 @@ const Header = ({ currentUser }) => {
 
       {/* <!-- Mobile Menu open: "block", Menu closed: "hidden" --> */}
       <div className="flex flex-col mt-4 space-y-2 lg:mt-0 lg:flex-row lg:-px-8 lg:space-y-0">
-        <a
-          className="mx-8 text-gray-700 transition-colors duration-200 transform dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
-          href="#"
-        >
-          Test
-        </a>
-        <a
-          className="mx-8 text-gray-700 transition-colors duration-200 transform dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
-          href="#"
-        >
-          Cheat Sheet
-        </a>
+        <Link href="/">
+          <a
+            className="mx-8 text-gray-700 transition-colors duration-200 transform dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
+            href="#"
+          >
+            Test
+          </a>
+        </Link>
+        <Link href="/cheatsheet">
+          <a
+            className="mx-8 text-gray-700 transition-colors duration-200 transform dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
+            href="#"
+          >
+            Cheat Sheet
+          </a>
+        </Link>
 
-        <a
-          className="mx-8 text-gray-700 transition-colors duration-200 transform dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
-          href="#"
-        >
-          Contact
-        </a>
+        <Link href="/">
+          <a
+            className="mx-8 text-gray-700 transition-colors duration-200 transform dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
+            href="#"
+          >
+            Contact
+          </a>
+        </Link>
         <a
           className="mx-8 text-gray-700 transition-colors duration-200 transform dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
           href="#"
