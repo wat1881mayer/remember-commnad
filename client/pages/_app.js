@@ -1,14 +1,20 @@
 import buildClient from '../api/build-client';
 import Header from '../components/header';
 import Footer from '../components/footer';
+import { SnackbarContextProvider } from '../context/snackbar-context';
+import CustomizedSnackbars from '../components/snakbar';
+import axios from 'axios';
 import '../styles/globals.css';
 
 const AppComponent = ({ Component, pageProps, currentUser }) => {
   return (
-    <section className="bg-white dark:bg-gray-800">
+    <section>
       <Header currentUser={currentUser} />
       <div>
-        <Component currentUser={currentUser} {...pageProps} />
+        <SnackbarContextProvider>
+          <Component currentUser={currentUser} {...pageProps} />
+          <CustomizedSnackbars />
+        </SnackbarContextProvider>
       </div>
       <Footer />
     </section>

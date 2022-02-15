@@ -2,11 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import Router from 'next/router';
-
+import { useContext } from 'react';
 import useRequest from '../../hooks/use-request';
+import { SnackbarContext } from '../../context/snackbar-context';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
+  const { toggleSnack } = useContext(SnackbarContext);
   const [password, setPassword] = useState('');
   const { doRequest, errors } = useRequest({
     url: '/api/users/signup',
@@ -15,7 +17,10 @@ const Signup = () => {
       email,
       password,
     },
-    onSuccess: () => Router.push('/'),
+    onSuccess: () => {
+      toggleSnack(true, 'success', '新規登録しました!!');
+      Router.push('/');
+    },
   });
 
   const onSubmit = async (event) => {
@@ -29,7 +34,7 @@ const Signup = () => {
       onSubmit={onSubmit}
     >
       <h1 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">
-        Sign in
+        Sign Up
       </h1>
       <div className="text-gray-700 dark:text-gray-200">
         <label>Email Address</label>

@@ -6,6 +6,7 @@ import { app } from '../app';
 declare global {
   function signin(): Promise<string[]>;
 }
+jest.mock('../nats-wrapper');
 
 let mongo: any;
 

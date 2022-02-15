@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import Router from 'next/router';
 import Link from 'next/link';
-
+import { SnackbarContext } from '../../context/snackbar-context';
 import useRequest from '../../hooks/use-request';
 
 const Signin = () => {
   const [email, setEmail] = useState('');
+  const { toggleSnack } = useContext(SnackbarContext);
   const [password, setPassword] = useState('');
   const { doRequest, errors } = useRequest({
     url: '/api/users/signin',
@@ -16,7 +17,10 @@ const Signin = () => {
       email,
       password,
     },
-    onSuccess: () => Router.push('/'),
+    onSuccess: () => {
+      toggleSnack(true, 'success', 'ログインしました!!');
+      Router.push('/');
+    },
   });
 
   const onSubmit = async (event) => {

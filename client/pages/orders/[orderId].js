@@ -47,11 +47,11 @@ const OrderShow = ({ order }) => {
   );
 };
 
-OrderShow.getInitialProps = async (context, client) => {
+export async function getServerSideProps(context, client) {
   const { orderId } = context.query;
   const { data } = await client.get(`/api/orders/${orderId}`);
 
   return { order: data };
-};
+}
 
 export default OrderShow;

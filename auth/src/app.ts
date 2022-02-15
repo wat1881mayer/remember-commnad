@@ -7,7 +7,6 @@ import { signinRouter } from './route/signin';
 import { signoutRouter } from './route/signout';
 import { signupRouter } from './route/signup';
 import { errorHandler, NotFoundError } from '@wattickets/common';
-import { cookie } from 'express-validator';
 
 const app = express();
 app.set('trust proxy', true);

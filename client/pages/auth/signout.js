@@ -1,14 +1,19 @@
-import { useRouter, userRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useContext } from 'react';
 import UseRequest from '../../hooks/use-request';
+import { SnackbarContext } from '../../context/snackbar-context';
 
 const Signout = () => {
   const router = useRouter();
+  const { toggleSnack } = useContext(SnackbarContext);
   const { doRequest } = UseRequest({
     url: '/api/users/signout',
     method: 'post',
     body: {},
-    onSuccess: () => router.push('/'),
+    onSuccess: () => {
+      toggleSnack(true, 'success', 'ログアウトしました!!');
+      router.push('/');
+    },
   });
 
   useEffect(() => {
