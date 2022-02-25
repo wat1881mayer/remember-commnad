@@ -4,18 +4,13 @@ import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 interface QuestionAttrs {
   id: string;
   category: string;
-  statement: string;
-  selection: string[];
   correct: number;
 }
 
 export interface QuestionDoc extends mongoose.Document {
   category: string;
-  statement: string;
-  selection: [string];
   version: number;
   correct: number;
-  answered?: number;
 }
 
 interface QuestionModel extends mongoose.Model<QuestionDoc> {
@@ -32,21 +27,9 @@ const QuestionSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    statement: {
-      type: String,
-      required: true,
-    },
-    selection: {
-      type: [String],
-      required: true,
-    },
     correct: {
       type: Number,
       required: true,
-    },
-    answered: {
-      type: Number,
-      required: false,
     },
   },
   {
@@ -63,8 +46,6 @@ QuestionSchema.statics.build = (attrs: QuestionAttrs) => {
   return new Question({
     _id: attrs.id,
     category: attrs.category,
-    statement: attrs.statement,
-    selection: attrs.selection,
     correct: attrs.correct,
   });
 };

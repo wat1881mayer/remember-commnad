@@ -1,13 +1,10 @@
 import express, { Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
-import {
-  validateRequest,
-  RequestValidationError,
-  DatabaseConnectionError,
-  BadRequestError,
-} from '@wattickets/common';
+import { validateRequest, BadRequestError } from '@wattickets/common';
 import { User } from '../models/user';
+import { Question, QuestionDoc } from '../models/question';
+import { Result } from '../models/result';
 
 const router = express.Router();
 
@@ -30,8 +27,24 @@ router.post(
       return res.send({});
     }
 
+    const questions = await Question.find({});
+    const usersQuestion = [];
+
+    if (questions) {
+      for (const question of questions) {
+        usersQuestion.push({
+          testId: question.id,
+          category: question.category,
+          answered: false,
+        });
+      }
+    }
+
     const user = User.build({ email, password });
     await user.save();
+
+    const result = Result.build({ userId: user.id, questions: usersQuestion });
+    await result.save();
 
     const userJwt = jwt.sign(
       {

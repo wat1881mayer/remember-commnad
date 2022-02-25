@@ -5,6 +5,8 @@ import { QuestionDeletedListener } from '../question-deleted-listener';
 import { QuestionDeletedEvent } from '@wattickets/common';
 import { natsWrapper } from '../../../nats-wrapper';
 import { Question } from '../../../models/question';
+import { Result, ResultDoc } from '../../../models/result';
+import { User } from '../../../models/user';
 
 const setup = async () => {
   //Create a listener
@@ -13,16 +15,10 @@ const setup = async () => {
   const question = Question.build({
     id: new mongoose.Types.ObjectId().toHexString(),
     category: 'git',
-    statement: '変更内容をステージングするコマンド',
-    selection: [
-      'git add .',
-      'git commit .',
-      'git push origin main',
-      'git pull origin main',
-    ],
     correct: 1,
   });
   await question.save();
+
   //create a fake data object
   const data: QuestionDeletedEvent['data'] = {
     id: question.id,
@@ -37,12 +33,33 @@ const setup = async () => {
   return { listener, data, msg, question };
 };
 
+const confirmDelete = (
+  results: (ResultDoc & {
+    _id: any;
+  })[],
+  testId: string
+) => {
+  for (const result of results) {
+    for (const question of result.questions) {
+      if (testId === question.testId) {
+        return false;
+      }
+    }
+  }
+  return true;
+};
+
 it('finds, updates,and saves a Question', async () => {
   const { msg, data, question, listener } = await setup();
+
+  await global.signin();
 
   await listener.onMessage(data, msg);
   const updatedQuestion = await Question.findById(question.id);
   expect(updatedQuestion).toBeNull();
+
+  const results = await Result.find({});
+  expect(confirmDelete(results, data.id)).toEqual(true);
 });
 
 it('acks the message', async () => {
