@@ -6,7 +6,9 @@ import { currentUserRouter } from './route/current-user';
 import { signinRouter } from './route/signin';
 import { signoutRouter } from './route/signout';
 import { signupRouter } from './route/signup';
-import { errorHandler, NotFoundError } from '@wattickets/common';
+import { errorHandler, NotFoundError, currentUser } from '@wattickets/common';
+import { resultQuestionRouter } from './route/questions/result';
+import { indexUserRouter } from './route';
 
 const app = express();
 app.set('trust proxy', true);
@@ -18,10 +20,13 @@ app.use(
   })
 );
 
+app.use(currentUser);
 app.use(currentUserRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
+app.use(resultQuestionRouter);
+app.use(indexUserRouter);
 
 app.use(errorHandler);
 
