@@ -56,7 +56,7 @@ it('acks the message', async () => {
   expect(msg.ack).toHaveBeenCalled();
 });
 
-it('creates and saves a ticket', async () => {
+it('creates and saves a result', async () => {
   const { listener, data, msg } = await setup();
   //call the onMessage  function with the data object + message object
   const firstQuestion = Question.build({
