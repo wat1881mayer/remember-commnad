@@ -31,8 +31,8 @@ const UseRequest = ({ url, method, body, onSuccess }) => {
                 Error
               </span>
               <ul className="text-sm text-gray-600 dark:text-gray-200">
-                {err.response.data.errors.map((err) => (
-                  <li key={err.message}>{err.message}</li>
+                {err.response.data.errors.map((err, index) => (
+                  <li key={index}>{err.message}</li>
                 ))}
               </ul>
             </div>

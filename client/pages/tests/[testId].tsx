@@ -4,12 +4,17 @@ import ResultRequest from '../../hooks/result-request';
 import Router from 'next/router';
 import { GetServerSideProps } from 'next/types';
 import { NextPage, InferGetServerSidePropsType } from 'next';
+import Error from 'next/error';
 
 import { SnackbarContext } from '../../context/snackbar-context';
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>;
 
-const TestShow: NextPage<Props> = ({ test }) => {
+const TestShow: NextPage<Props> = ({ test, errorCode }) => {
+  if (errorCode) {
+    return <Error statusCode={404} />;
+  }
+
   const { toggleSnack } = useContext(SnackbarContext);
   const select1Input = react.createRef<HTMLInputElement>();
   const select2Input = react.createRef<HTMLInputElement>();
@@ -174,17 +179,25 @@ const TestShow: NextPage<Props> = ({ test }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { testId } = ctx.query;
 
-  const { data } = await axios.get(
-    `http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/questions/${testId}`,
-    {
-      headers: {
-        Host: 'ticketing.dev',
-      },
-    }
-  );
-  return {
-    props: { test: data },
-  };
+  try {
+    const { data } = await axios.get(
+      `http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/questions/${testId}`,
+      {
+        headers: {
+          Host: 'ticketing.dev',
+        },
+      }
+    );
+
+    return {
+      props: { test: data, errorCode: null },
+    };
+  } catch (err) {
+    const errorCode = 404;
+    return {
+      props: { test: null, errorCode: errorCode },
+    };
+  }
 };
 
 export default TestShow;

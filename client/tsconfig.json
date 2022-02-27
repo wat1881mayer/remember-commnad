@@ -18,6 +18,12 @@
     "noImplicitThis": true,
     "strictNullChecks": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/snakbar.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "components/snakbar.js",
+    "components/CheckBoxGroup.ts"
+  ],
   "exclude": ["node_modules"]
 }

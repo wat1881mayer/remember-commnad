@@ -3,6 +3,7 @@ import {
   NotAuthorizedError,
   NotFoundError,
   requireAuth,
+  NotAccessError,
 } from '@wattickets/common';
 import { natsWrapper } from '../nats-wrapper';
 import { Question, QuestionDoc } from '../models/question';
@@ -21,7 +22,7 @@ router.delete(
     }
 
     if (question.userId !== req.currentUser!.id) {
-      throw new NotAuthorizedError();
+      throw new NotAccessError();
     }
 
     const result = await Question.findByIdAndDelete(

@@ -6,7 +6,7 @@ import {
   NotFoundError,
   requireAuth,
   NotAuthorizedError,
-  BadRequestError,
+  NotAccessError,
 } from '@wattickets/common';
 import { Question } from '../models/question';
 import { QuestionUpdatedPublisher } from '../events/publisher/question-updated-publisher';
@@ -51,7 +51,7 @@ router.put(
     }
 
     if (question.userId !== req.currentUser!.id) {
-      throw new NotAuthorizedError();
+      throw new NotAccessError();
     }
 
     const { select1, select2, select3, select4 } = req.body;
