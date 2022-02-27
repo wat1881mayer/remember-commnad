@@ -23,19 +23,19 @@ router.put(
     body('select1')
       .not()
       .isEmpty()
-      .withMessage('選択肢には何らかの内容を入れてください'),
+      .withMessage('選択肢1には何らかの内容を入れてください'),
     body('select2')
       .not()
       .isEmpty()
-      .withMessage('選択肢には何らかの内容を入れてください'),
+      .withMessage('選択肢2には何らかの内容を入れてください'),
     body('select3')
       .not()
       .isEmpty()
-      .withMessage('選択肢には何らかの内容を入れてください'),
+      .withMessage('選択肢3には何らかの内容を入れてください'),
     body('select4')
       .not()
       .isEmpty()
-      .withMessage('選択肢には何らかの内容を入れてください'),
+      .withMessage('選択肢4には何らかの内容を入れてください'),
     body('correct')
       .not()
       .isEmpty()
