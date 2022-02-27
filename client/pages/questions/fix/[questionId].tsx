@@ -9,14 +9,20 @@ import TestSection from '../../../components/testSection';
 import Modal from '../../../components/modal';
 import { SnackbarContext } from '../../../context/snackbar-context';
 import { useRouter } from 'next/router';
+import Error from 'next/error';
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>;
 
-const QuestionShow: NextPage<Props> = ({ question }) => {
+const QuestionShow: NextPage<Props> = ({ question, errorCode }) => {
+  if (errorCode) {
+    return <Error statusCode={404} />;
+  }
+
   const { toggleSnack } = useContext(SnackbarContext);
   const current_path = useRouter();
 
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [returnErrors, setReturnErrors] = useState(null);
   const [category, setCategory] = useState<string>(question.category);
   const [statement, setStatement] = useState<string>(question.statement);
   const [select1, setSelect1] = useState<string>(question.selection[0]);
@@ -53,6 +59,7 @@ const QuestionShow: NextPage<Props> = ({ question }) => {
   const onSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     await doRequest();
+    setReturnErrors(errors);
   };
 
   const test = {
@@ -103,7 +110,7 @@ const QuestionShow: NextPage<Props> = ({ question }) => {
           </div>
         </div>
         <TestSection test={test} />
-        {errors}
+        {returnErrors}
         <div className="flex justify-end mx-4 my-4">
           <button className="block px-5 py-2 mt-4 mb-2 font-medium leading-5 text-center   capitalize bg-gray-500 text-white rounded-lg lg:mt-0 hover:bg-blue-500 hover:text-white lg:w-autohover:bg-blue-600 focus:outline-none focus:bg-blue-600 dark:bg-blue-600">
             修正完了
@@ -126,17 +133,24 @@ const QuestionShow: NextPage<Props> = ({ question }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { questionId } = ctx.query;
 
-  const { data } = await axios.get(
-    `http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/questions/${questionId}`,
-    {
-      headers: {
-        Host: 'ticketing.dev',
-      },
-    }
-  );
-  return {
-    props: { question: data },
-  };
+  try {
+    const { data } = await axios.get(
+      `http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/questions/${questionId}`,
+      {
+        headers: {
+          Host: 'ticketing.dev',
+        },
+      }
+    );
+    return {
+      props: { question: data, errorCode: null },
+    };
+  } catch (err) {
+    const errorCode = 404;
+    return {
+      props: { test: null, errorCode: errorCode },
+    };
+  }
 };
 
 export default QuestionShow;

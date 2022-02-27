@@ -24,22 +24,6 @@ build:
         manual:
           - src: '**/*.js'
             dest: .
-    - image: tghtgh123123/tickets
-      context: tickets
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .
-    - image: tghtgh123123/orders
-      context: orders
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .
     - image: tghtgh123123/questions
       context: questions
       docker:

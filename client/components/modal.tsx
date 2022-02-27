@@ -23,7 +23,7 @@ const Modal: React.FC<AppProps> = ({ setter }) => {
     },
   });
 
-  const onClick = async (event: any) => {
+  const onClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setter(false);
     await doRequest();
