@@ -106,12 +106,11 @@ const Test: NextPage<Props> = ({ tests }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const headers: any = context.req.headers;
   const { data } = await axios.get(
     'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/questions',
     {
-      headers: {
-        Host: 'ticketing.dev',
-      },
+      headers: headers,
     }
   );
   return {
