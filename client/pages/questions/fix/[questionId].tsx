@@ -132,14 +132,13 @@ const QuestionShow: NextPage<Props> = ({ question, errorCode }) => {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { questionId } = ctx.query;
+  const headers: any = ctx.req.headers;
 
   try {
     const { data } = await axios.get(
       `http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/questions/${questionId}`,
       {
-        headers: {
-          Host: 'ticketing.dev',
-        },
+        headers: headers,
       }
     );
     return {
