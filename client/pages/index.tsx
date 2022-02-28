@@ -3,8 +3,6 @@ import Link from 'next/link';
 import React from 'react';
 
 const LandingPage: NextPage = () => {
-  /* This example requires Tailwind CSS v2.0+ */
-
   return (
     <div className="container px-6 py-16 mx-auto text-center ">
       <div className="max-w-lg mx-auto">
