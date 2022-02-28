@@ -117,12 +117,9 @@ const Mypage: NextPage<Props> = ({ result }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const headers: any = context.req.headers;
 
-  const { data } = await axios.get(
-    'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/users',
-    {
-      headers: headers,
-    }
-  );
+  const { data } = await axios.get('http://www.remember-cli.com/api/users', {
+    headers: headers,
+  });
 
   return {
     props: { result: data },
