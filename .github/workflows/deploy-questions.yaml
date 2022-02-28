@@ -20,6 +20,6 @@ jobs:
       - run: docker push tghtgh123123/questions
       - uses: digitalocean/action-doctl@v2
         with:
-          tokens: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       - run: doctl kubernetes cluster kubeconfig save remember-cli-cluster
       - run: kubectl rollout restart deployment questions-depl
