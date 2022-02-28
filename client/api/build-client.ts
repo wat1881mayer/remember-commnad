@@ -10,7 +10,7 @@ const buildClient = ({ req }: any) => {
     });
   } else {
     return axios.create({
-      baseURL: 'http://www.remember-cli.com/',
+      baseURL: '/',
     });
   }
 };
