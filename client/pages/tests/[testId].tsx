@@ -10,7 +10,7 @@ import { SnackbarContext } from '../../context/snackbar-context';
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>;
 
-const TestShow: NextPage<Props> = ({ test, errorCode }) => {
+const TestShow: NextPage<Props> = ({ test, errorCode, currentUser }) => {
   if (errorCode) {
     return <Error statusCode={404} />;
   }
@@ -36,6 +36,7 @@ const TestShow: NextPage<Props> = ({ test, errorCode }) => {
         setIsCorrect(true);
       }
     },
+    currentUser,
   });
 
   useEffect(() => {
