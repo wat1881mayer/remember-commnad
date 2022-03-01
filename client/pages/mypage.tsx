@@ -9,10 +9,14 @@ import ProgressBar from '../components/progressBar';
 import { testResultCalc } from '../src/func/testResultCalc';
 import { QuestionDoc } from '../src/interface/testresult/questionDoc';
 import TestResultRow from '../components/testResultRow';
+import Error from 'next/error';
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>;
 
-const Mypage: NextPage<Props> = ({ result }) => {
+const Mypage: NextPage<Props> = ({ result, errorCode }) => {
+  if (errorCode) {
+    return <Error statusCode={404} />;
+  }
   const rate = testResultCalc(result);
   const [gitCompleted, setGitCompleted] = useState(rate.gitCompletedRate);
   const [dockerCompleted, setDockerCompleted] = useState(
@@ -117,13 +121,20 @@ const Mypage: NextPage<Props> = ({ result }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const headers: any = context.req.headers;
 
-  const { data } = await axios.get('http://www.remember-cli.com/api/users', {
-    headers: headers,
-  });
+  try {
+    const { data } = await axios.get('http://www.remember-cli.com/api/users', {
+      headers: headers,
+    });
 
-  return {
-    props: { result: data },
-  };
+    return {
+      props: { result: data, errorCode: null },
+    };
+  } catch (err) {
+    const errorCode = 404;
+    return {
+      props: { result: null, errorCode: errorCode },
+    };
+  }
 };
 
 export default Mypage;
