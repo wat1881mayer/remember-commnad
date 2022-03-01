@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 
-const ResultRequest = ({ url, method, body, onSuccess }) => {
+const ResultRequest = ({ url, method, body, onSuccess, currentUser }) => {
   const [errors, setErrors] = useState(null);
   const [resultForm, setResultForm] = useState(null);
   const doRequest = async () => {
@@ -19,11 +19,13 @@ const ResultRequest = ({ url, method, body, onSuccess }) => {
                   テスト一覧へ
                 </a>
               </Link>
-              <Link href="/mypage">
-                <a className="justify-end px-5 py-2 ml-2 mt-4 font-medium border-2 border-blue-600 leading-5 text-center   capitalize bg-white text-blue-500 rounded-lg lg:mt-0 hover:bg-blue-500 hover:text-white lg:w-autohover:bg-blue-500 dark:bg-blue-600 dark:text-white">
-                  成績を確認
-                </a>
-              </Link>
+              {currentUser && (
+                <Link href="/mypage">
+                  <a className="justify-end px-5 py-2 ml-2 mt-4 font-medium border-2 border-blue-600 leading-5 text-center   capitalize bg-white text-blue-500 rounded-lg lg:mt-0 hover:bg-blue-500 hover:text-white lg:w-autohover:bg-blue-500 dark:bg-blue-600 dark:text-white">
+                    成績を確認
+                  </a>
+                </Link>
+              )}
             </div>
           );
         }
