@@ -123,7 +123,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const headers: any = context.req.headers;
 
   try {
-    const { data } = await axios.get(`${domain.kubernetes}/api/users`, {
+    const { data } = await axios.get(`${domain.kubernetes}api/users`, {
       headers: headers,
     });
 
