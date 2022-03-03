@@ -1,10 +1,12 @@
 import buildClient from '../api/build-client';
 import Header from '../components/header';
+import axios from 'axios';
 import Footer from '../components/footer';
 import { SnackbarContextProvider } from '../context/snackbar-context';
 import CustomizedSnackbars from '../components/snakbar';
 import '../styles/globals.css';
 import Error from 'next/error';
+import { domain } from '../src/config/keys';
 
 const AppComponent = ({
   Component,
@@ -30,15 +32,19 @@ const AppComponent = ({
 };
 
 AppComponent.getInitialProps = async (appContext: any) => {
-  const client = buildClient(appContext.ctx);
+  const headers: any = appContext.ctx.req.headers;
   let pageProps = {};
   try {
-    const { data } = await client.get('/api/users/currentuser');
+    const { data } = await axios.get(
+      `${domain.kubernetes}api/users/currentuser`,
+      {
+        headers: headers,
+      }
+    );
 
     if (appContext.Component.getInitialProps) {
       pageProps = await appContext.Component.getInitialProps(
         appContext.ctx,
-        client,
         data.currentUser
       );
     }
