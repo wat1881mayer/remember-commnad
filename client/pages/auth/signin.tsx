@@ -73,7 +73,7 @@ const Signin: NextPage = () => {
         <span className="text-sm text-gray-600 dark:text-gray-200">
           パスワードを忘れた方は{' '}
         </span>
-        <Link href="/auth/signup">
+        <Link href="/auth/forgetpassword">
           <a
             href="#"
             className="mx-2 text-sm font-bold text-blue-500 dark:text-blue-400 hover:underline"

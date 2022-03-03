@@ -101,12 +101,12 @@ const Header: NextPage<any> = ({ currentUser }) => {
           </a>
         </Link>
 
-        <Link href="/">
+        <Link href="/about">
           <a
             className="mx-8 text-gray-700 transition-colors duration-200 transform dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
             href="#"
           >
-            Contact
+            About
           </a>
         </Link>
         {links}

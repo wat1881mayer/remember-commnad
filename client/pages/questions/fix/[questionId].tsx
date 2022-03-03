@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { NextPage, InferGetServerSidePropsType } from 'next';
 import { GetServerSideProps } from 'next/types';
@@ -10,6 +10,7 @@ import Modal from '../../../components/modal';
 import { SnackbarContext } from '../../../context/snackbar-context';
 import { useRouter } from 'next/router';
 import Error from 'next/error';
+import { domain } from '../../../src/config/keys';
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>;
 
@@ -22,7 +23,7 @@ const QuestionShow: NextPage<Props> = ({ question, errorCode }) => {
   const current_path = useRouter();
 
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [returnErrors, setReturnErrors] = useState(null);
+  const [deleteErrors, setDeleteErrors] = useState<any>(null);
   const [category, setCategory] = useState<string>(question.category);
   const [statement, setStatement] = useState<string>(question.statement);
   const [select1, setSelect1] = useState<string>(question.selection[0]);
@@ -30,6 +31,8 @@ const QuestionShow: NextPage<Props> = ({ question, errorCode }) => {
   const [select3, setSelect3] = useState<string>(question.selection[2]);
   const [select4, setSelect4] = useState<string>(question.selection[3]);
   const [correct, setCorrect] = useState<number>(question.correct);
+
+  console.log(deleteErrors);
 
   const handleonChangeEventofStatement = (value: string) => setStatement(value);
   const handleonChangeEventofSelect1 = (value: string) => setSelect1(value);
@@ -59,7 +62,6 @@ const QuestionShow: NextPage<Props> = ({ question, errorCode }) => {
   const onSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     await doRequest();
-    setReturnErrors(errors);
   };
 
   const test = {
@@ -110,13 +112,14 @@ const QuestionShow: NextPage<Props> = ({ question, errorCode }) => {
           </div>
         </div>
         <TestSection test={test} />
-        {returnErrors}
         <div className="flex justify-end mx-4 my-4">
           <button className="block px-5 py-2 mt-4 mb-2 font-medium leading-5 text-center   capitalize bg-gray-500 text-white rounded-lg lg:mt-0 hover:bg-blue-500 hover:text-white lg:w-autohover:bg-blue-600 focus:outline-none focus:bg-blue-600 dark:bg-blue-600">
             修正完了
           </button>
         </div>
       </form>
+      {errors}
+      {deleteErrors}
       <div className="flex justify-start mx-4 my-4">
         <button
           className="block px-5 py-2 mt-4 font-medium leading-5 text-center   capitalize bg-red-600 text-white rounded-lg lg:mt-0 hover:bg-red-500 hover:text-white lg:w-autohover:bg-red-500 focus:outline-none focus:bg-red-500"
@@ -125,7 +128,9 @@ const QuestionShow: NextPage<Props> = ({ question, errorCode }) => {
           削除
         </button>
       </div>
-      {showModal ? <Modal setter={setShowModal} /> : null}
+      {showModal ? (
+        <Modal setter={setShowModal} setErrors={setDeleteErrors} />
+      ) : null}
     </div>
   );
 };
@@ -136,7 +141,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   try {
     const { data } = await axios.get(
-      `http://www.remember-cli.com/api/questions/${questionId}`,
+      `${domain.kubernetes}/api/questions/${questionId}`,
       {
         headers: headers,
       }
