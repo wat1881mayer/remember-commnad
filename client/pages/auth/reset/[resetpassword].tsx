@@ -90,7 +90,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   try {
     const { data } = await axios.get(
-      `${domain.kubernetes}/api/users/reset/${resetpassword}`,
+      `${domain.kubernetes}api/users/reset/${resetpassword}`,
       {
         headers: headers,
       }

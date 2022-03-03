@@ -183,7 +183,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   try {
     const { data } = await axios.get(
-      `${domain.kubernetes}/api/questions/${testId}`,
+      `${domain.kubernetes}api/questions/${testId}`,
       {
         headers: headers,
       }
