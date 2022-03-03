@@ -32,15 +32,10 @@ const AppComponent = ({
 };
 
 AppComponent.getInitialProps = async (appContext: any) => {
-  const headers: any = appContext.ctx.req.headers;
+  const client = buildClient(appContext.ctx);
   let pageProps = {};
   try {
-    const { data } = await axios.get(
-      `${domain.kubernetes}api/users/currentuser`,
-      {
-        headers: headers,
-      }
-    );
+    const { data } = await client.get('api/users/currentuser');
 
     if (appContext.Component.getInitialProps) {
       pageProps = await appContext.Component.getInitialProps(
