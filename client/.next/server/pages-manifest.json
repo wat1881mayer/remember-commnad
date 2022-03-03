@@ -1,5 +1,19 @@
 {
   "/_app": "pages/_app.js",
+  "/about": "pages/about.js",
+  "/auth/forgetpassword": "pages/auth/forgetpassword.js",
+  "/auth/reset/[resetpassword]": "pages/auth/reset/[resetpassword].js",
+  "/auth/sentemail": "pages/auth/sentemail.js",
+  "/auth/signin": "pages/auth/signin.js",
+  "/auth/signout": "pages/auth/signout.js",
+  "/auth/signup": "pages/auth/signup.js",
+  "/cheatsheet": "pages/cheatsheet.js",
+  "/": "pages/index.js",
+  "/mypage": "pages/mypage.js",
+  "/questions/fix/[questionId]": "pages/questions/fix/[questionId].js",
+  "/testlist": "pages/testlist.js",
+  "/tests/[testId]": "pages/tests/[testId].js",
+  "/tests/createtest": "pages/tests/createtest.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js"
 }

@@ -1,4 +1,4 @@
-import CommandAttrs from './interface/commandAttrs';
+import CommandAttrs from '../interface/commandAttrs';
 
 export const kubectlCommandList: CommandAttrs[] = [
   {
