@@ -1,10 +1,10 @@
 import react, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import ResultRequest from '../../hooks/result-request';
-import Router from 'next/router';
 import { GetServerSideProps } from 'next/types';
 import { NextPage, InferGetServerSidePropsType } from 'next';
 import Error from 'next/error';
+import { domain } from '../../src/config/keys';
 
 import { SnackbarContext } from '../../context/snackbar-context';
 
@@ -183,7 +183,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   try {
     const { data } = await axios.get(
-      `http://www.remember-cli.com/api/questions/${testId}`,
+      `${domain.kubernetes}/api/questions/${testId}`,
       {
         headers: headers,
       }

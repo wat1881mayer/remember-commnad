@@ -1,31 +1,36 @@
-import useRequest from '../hooks/use-request';
+import modalRequest from '../hooks/modal-request';
 import Router from 'next/router';
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import { SnackbarContext } from '../context/snackbar-context';
 import { BooleanDispatch } from '../src/type/dispatch';
 
 type AppProps = {
   setter: BooleanDispatch;
+  setErrors: any;
 };
 
-const Modal: React.FC<AppProps> = ({ setter }) => {
+const Modal: React.FC<AppProps> = ({ setter, setErrors }) => {
   const current_path = useRouter();
   const { toggleSnack } = useContext(SnackbarContext);
-  const { doRequest, errors } = useRequest({
+  const { doRequest, errors } = modalRequest({
     url: `/api/questions/${current_path.query.questionId}`,
     method: 'delete',
     body: {},
     onSuccess: () => {
       toggleSnack(true, 'success', 'テストを削除しました。');
       Router.push('/');
+      setter(false);
+    },
+    onFailed: (error: any) => {
+      setErrors(error);
+      setter(false);
     },
   });
 
   const onClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    setter(false);
     await doRequest();
   };
 

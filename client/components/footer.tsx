@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
 
       <div className="flex -mx-2">
         <a
-          href="#"
+          href="https://twitter.com/@LearnerWat"
           className="mx-2 text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-300"
           aria-label="Twitter"
         >
@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
         </a>
 
         <a
-          href="#"
+          href="https://github.com/wat1881mayer"
           className="mx-2 text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-300"
           aria-label="Github"
         >

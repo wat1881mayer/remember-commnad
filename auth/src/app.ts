@@ -9,6 +9,8 @@ import { signupRouter } from './route/signup';
 import { errorHandler, NotFoundError, currentUser } from '@wattickets/common';
 import { resultQuestionRouter } from './route/questions/result';
 import { indexUserRouter } from './route';
+import { resetTokenCreatedRouter } from './route/reset/reset-token-created';
+import { resetPasswordRouter } from './route/reset/reset-password';
 
 const app = express();
 app.set('trust proxy', true);
@@ -27,6 +29,8 @@ app.use(signoutRouter);
 app.use(signupRouter);
 app.use(resultQuestionRouter);
 app.use(indexUserRouter);
+app.use(resetTokenCreatedRouter);
+app.use(resetPasswordRouter);
 
 app.use(errorHandler);
 

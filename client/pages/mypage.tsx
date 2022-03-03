@@ -10,6 +10,7 @@ import { testResultCalc } from '../src/func/testResultCalc';
 import { QuestionDoc } from '../src/interface/testresult/questionDoc';
 import TestResultRow from '../components/testResultRow';
 import Error from 'next/error';
+import { domain } from '../src/config/keys';
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>;
 
@@ -122,7 +123,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const headers: any = context.req.headers;
 
   try {
-    const { data } = await axios.get('http://www.remember-cli.com/api/users', {
+    const { data } = await axios.get(`${domain.kubernetes}/api/users`, {
       headers: headers,
     });
 
