@@ -32,22 +32,29 @@ const AppComponent = ({
 };
 
 AppComponent.getInitialProps = async (appContext: any) => {
-  const client = buildClient(appContext.ctx);
+  const headers: any = appContext.ctx.req.headers;
   let pageProps = {};
   try {
-    const { data } = await client.get('api/users/currentuser');
-
-    if (appContext.Component.getInitialProps) {
-      pageProps = await appContext.Component.getInitialProps(
-        appContext.ctx,
-        data.currentUser
+    if (typeof window !== 'undefined') {
+      const { data } = await axios.get(
+        `${domain.kubernetes}api/users/currentuser`,
+        {
+          headers: headers,
+        }
       );
-    }
 
-    return {
-      pageProps,
-      ...data,
-    };
+      if (appContext.Component.getInitialProps) {
+        pageProps = await appContext.Component.getInitialProps(
+          appContext.ctx,
+          data.currentUser
+        );
+      }
+      return {
+        pageProps,
+        ...data,
+      };
+      return { pageProps };
+    }
   } catch (err) {
     console.log(err);
     const errorCode = 404;
