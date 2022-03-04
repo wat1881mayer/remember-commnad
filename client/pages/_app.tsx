@@ -32,7 +32,7 @@ const AppComponent = ({
 };
 
 AppComponent.getInitialProps = async (appContext: any) => {
-  const headers: any = appContext.ctx.req.headers;
+  const headers: any = appContext.ctx.headers;
   let pageProps = {};
   try {
     if (typeof window !== 'undefined') {
