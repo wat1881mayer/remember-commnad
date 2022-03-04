@@ -48,6 +48,7 @@ const ForgetPassword: NextPage = () => {
           送信
         </button>
       </div>
+      {errors}
     </form>
   );
 };
