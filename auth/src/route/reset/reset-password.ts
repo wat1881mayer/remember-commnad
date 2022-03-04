@@ -29,7 +29,7 @@ router.post(
     user!.password = req.body.password;
     await user?.save();
     await PasswordReset.deleteOne({ _id: passwordReset!._id });
-    res.status(200).send();
+    res.status(200).send({});
   }
 );
 

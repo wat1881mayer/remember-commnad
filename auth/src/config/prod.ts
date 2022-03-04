@@ -1,4 +1,4 @@
 export const prodDomain = {
-  host: 'http://www.rememeber-cli.com',
-  kubernetes: 'http://www.rememeber-cli.com',
+  host: 'http://www.remember-cli.com',
+  kubernetes: 'http://www.remember-cli.com',
 };
