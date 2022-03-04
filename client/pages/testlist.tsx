@@ -108,6 +108,7 @@ const Test: NextPage<Props> = ({ tests }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const headers: any = context.req.headers;
+  console.log('domainkube', domain.kubernetes);
   const { data } = await axios.get(`${domain.kubernetes}api/questions`, {
     headers: headers,
   });
