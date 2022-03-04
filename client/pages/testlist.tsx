@@ -108,12 +108,9 @@ const Test: NextPage<Props> = ({ tests }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const headers: any = context.req.headers;
-  const { data } = await axios.get(
-    'http://www.remember-cli.com/api/questions',
-    {
-      headers: headers,
-    }
-  );
+  const { data } = await axios.get(`${domain.kubernetes}/api/questions`, {
+    headers: headers,
+  });
   return {
     props: { tests: data },
   };
