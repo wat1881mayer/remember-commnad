@@ -53,8 +53,8 @@ AppComponent.getInitialProps = async (appContext: any) => {
         pageProps,
         ...data,
       };
-      return { pageProps };
     }
+    return { pageProps };
   } catch (err) {
     console.log(err);
     const errorCode = 404;
