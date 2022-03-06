@@ -95,7 +95,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         headers: headers,
       }
     );
-    console.log(data);
     return {
       props: { token: resetpassword, valid: data.valid, errorCode: null },
     };

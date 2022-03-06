@@ -18,6 +18,10 @@ router.post(
       throw new Error('SEND_GRID KEY must be defined');
     }
 
+    if (!process.env.ADDRESS_KEY) {
+      throw new Error('ADDRESS_KEY must be defined');
+    }
+
     const email = req.body.email;
 
     const user = await User.findOne({ email: email });
@@ -44,7 +48,7 @@ router.post(
     sgMail.setApiKey(process.env.SENDGRID_KEY);
     const msg = {
       to: email, // Change to your recipient
-      from: 'mailyservice080@gmail.com', // Change to your verified sender
+      from: process.env.ADDRESS_KEY, // Change to your verified sender
       subject: 'パスワード再設定用URLをご連絡します。',
       text: 'パスワード再設定用のURLをご連絡します。有効期限は2時間以内となります。',
       html: `<strong>パスワード再設定用のURLをご連絡します。有効期限は2時間以内となります。<a href=${domain.host}/auth/reset/${token}>パスワード再設定用URL</a>}</strong>`,
