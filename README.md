@@ -61,6 +61,7 @@ http://www.remember-cli.com/
 ### その他ツール
 
 - skaffold(google)
+- SENDGRID
 
 ## アーキテクチャ構成
 
