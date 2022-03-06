@@ -89,7 +89,7 @@ const TestSection: React.FC<AppProps> = ({ test }) => {
           <input
             className="appearance-none block bg-gray-100 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             value={test!.correct}
-            type="number"
+            type="text"
             placeholder=""
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               test!.handleonChangeEventofCorrect(Number(e.target.value))

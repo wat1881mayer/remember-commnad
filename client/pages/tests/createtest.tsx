@@ -5,7 +5,6 @@ import { NextPage } from 'next';
 import TestSection from '../../components/testSection';
 import useRequest from '../../hooks/use-request';
 import { SnackbarContext } from '../../context/snackbar-context';
-import { StringDispatch } from '../../src/type/dispatch';
 import { questionProps } from '../../src/type/question';
 
 const CreateTest: NextPage = () => {
@@ -16,7 +15,7 @@ const CreateTest: NextPage = () => {
   const [select2, setSelect2] = useState<string>('');
   const [select3, setSelect3] = useState<string>('');
   const [select4, setSelect4] = useState<string>('');
-  const [correct, setCorrect] = useState<number>(1);
+  const [correct, setCorrect] = useState<number>(0);
 
   const handleonChangeEventofStatement = (value: string) => setStatement(value);
   const handleonChangeEventofSelect1 = (value: string) => setSelect1(value);
