@@ -50,8 +50,8 @@ router.post(
       to: email, // Change to your recipient
       from: process.env.ADDRESS_KEY, // Change to your verified sender
       subject: 'パスワード再設定用URLをご連絡します。',
-      text: 'パスワード再設定用のURLをご連絡します。有効期限は2時間以内となります。',
-      html: `<strong>パスワード再設定用のURLをご連絡します。有効期限は2時間以内となります。<a href=${domain.host}/auth/reset/${token}>パスワード再設定用URL</a>}</strong>`,
+      text: 'Remember-commandのパスワード再設定用のURLをご連絡します。有効期限は2時間以内となります。',
+      html: `<strong>Remember-Commandのパスワード再設定用のURLをご連絡します。有効期限は2時間以内となります。<a href=${domain.host}/auth/reset/${token}>パスワード再設定用URL</a></strong>`,
     };
     sgMail
       .send(msg)
