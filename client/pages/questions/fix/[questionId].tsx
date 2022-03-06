@@ -32,8 +32,6 @@ const QuestionShow: NextPage<Props> = ({ question, errorCode }) => {
   const [select4, setSelect4] = useState<string>(question.selection[3]);
   const [correct, setCorrect] = useState<number>(question.correct);
 
-  console.log(deleteErrors);
-
   const handleonChangeEventofStatement = (value: string) => setStatement(value);
   const handleonChangeEventofSelect1 = (value: string) => setSelect1(value);
   const handleonChangeEventofSelect2 = (value: string) => setSelect2(value);

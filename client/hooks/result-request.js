@@ -34,7 +34,6 @@ const ResultRequest = ({ url, method, body, onSuccess, currentUser }) => {
       }
       return response.data;
     } catch (err) {
-      console.log(err);
       setErrors(
         <div className="flex w-full max-w-3xl mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
           <div className="flex items-center justify-center w-12 bg-red-500">

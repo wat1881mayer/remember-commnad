@@ -18,7 +18,7 @@ interface PasswordResetModel extends mongoose.Model<PasswordResetDoc> {
 
 export interface PasswordResetDoc extends mongoose.Document {
   user: UserDoc;
-  password: string;
+  token: string;
 }
 
 const userSchema = new mongoose.Schema(

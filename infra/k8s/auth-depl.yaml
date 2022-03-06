@@ -28,6 +28,11 @@ spec:
                 secretKeyRef:
                   name: sendgrid-secret
                   key: SENDGRID_KEY
+            - name: ADDRESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: address-secret
+                  key: ADDRESS_KEY
             - name: NATS_CLIENT_ID
               valueFrom:
                 fieldRef:

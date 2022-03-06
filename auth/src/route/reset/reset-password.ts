@@ -28,6 +28,7 @@ router.post(
     let user = await User.findOne({ _id: passwordReset!.user });
     user!.password = req.body.password;
     await user?.save();
+
     await PasswordReset.deleteOne({ _id: passwordReset!._id });
     res.status(200).send({});
   }
