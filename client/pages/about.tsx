@@ -7,13 +7,13 @@ const About: NextPage = () => {
     <div>
       <section className="bg-white dark:bg-gray-800">
         <div className="container px-6 py-8 mx-auto">
-          <div className="items-center lg:flex">
+          <div className="items-center lg:flex mb-8">
             <div className="lg:w-1/2">
               <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
                 当サービスの制作者について
               </h2>
 
-              <p className="mt-4 text-gray-500 dark:text-gray-400 lg:max-w-md">
+              <p className="mt-4 text-gray-500 dark:text-gray-300 lg:max-w-md">
                 稲葉渉と申します。 独立系SIerでキャリアをスタートした{'      '}
                 ITエンジニアです。 明治大学 政治経済学部 経済学科卒
                 2019年に、富士ソフト株式会社に新卒入社し2年半勤務。
@@ -61,6 +61,39 @@ const About: NextPage = () => {
                   <Image
                     className="object-cover object-center w-full h-64 rounded-md shadow"
                     src="/profile.png"
+                    width={250}
+                    height={250}
+                    alt="image"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="items-center lg:flex mb-8">
+            <div className="lg:w-1/2">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
+                ポートフォリオサイトに関して
+              </h2>
+              <p className="mt-4 text-gray-500 dark:text-gray-300 lg:max-w-md">
+                当サービス制作者のポートフォリオを一括管理するWebサイトはこちら
+                <br />
+                ポートフォリオサイト自体は、Gatsby.jsで作成しCMSとしてはStrapiを利用しています。
+              </p>
+              <a
+                href="https://wattylerportfolio.netlify.app"
+                className="mx-2 text-sm font-bold text-blue-500 dark:text-blue-400 hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://wattylerportfolio.netlify.app
+              </a>
+            </div>
+            <div className="mt-8 lg:mt-0 lg:w-1/2">
+              <div className="flex items-center justify-center ">
+                <div className="max-w-lg">
+                  <Image
+                    className="object-cover object-center w-full h-64 rounded-md shadow"
+                    src="/portfolio.png"
                     width={250}
                     height={250}
                     alt="image"
