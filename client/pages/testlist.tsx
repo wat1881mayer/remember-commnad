@@ -65,7 +65,7 @@ const Test: NextPage<Props> = ({ tests }) => {
               options={[
                 { value: 'git', label: 1 },
                 { value: 'docker', label: 2 },
-                { value: 'kubectl', label: 3 },
+                { value: 'kubernetes', label: 3 },
               ]}
             />
             <div className="overflow-hidden shadow-md sm:rounded-lg">
