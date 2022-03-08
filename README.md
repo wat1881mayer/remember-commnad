@@ -24,6 +24,14 @@ http://www.remember-cli.com/
 
 <br>
 
+## 技術特徴
+
+- SPA
+- SSR
+- マイクロサービス
+- kubernetes クラスターによってデプロイ(単なる heroku でのデプロイではなく、デプロイそのものにも工夫あり)
+- Typescript を使用
+
 ## 使用技術
 
 ### バックエンド
@@ -45,10 +53,13 @@ http://www.remember-cli.com/
 
 ### インフラストラクチャー
 
-- Digital Ocean
 - Ingress-Nginx
 - Docker
 - Kubernetes
+
+### deploy
+
+- Digital Ocean
 
 ### テストツール
 
