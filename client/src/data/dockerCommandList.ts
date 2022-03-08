@@ -26,7 +26,7 @@ export const dockerCommandList: CommandAttrs[] = [
   {
     command: 'create',
     description: '新しいコンテナの作成',
-    example: 'docker build -it fedara bash',
+    example: 'docker create -it fedara bash',
     options: [
       {
         optionName: '-i',
