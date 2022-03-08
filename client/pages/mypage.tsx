@@ -23,8 +23,8 @@ const Mypage: NextPage<Props> = ({ result, errorCode }) => {
   const [dockerCompleted, setDockerCompleted] = useState(
     rate.dockerCompletedRate
   );
-  const [kubectlCompleted, setKubectlCompleted] = useState(
-    rate.kubectlCompletedRate
+  const [kubernetesCompleted, setKubenetesCompleted] = useState(
+    rate.kubernetesCompletedRate
   );
 
   useEffect(() => {}, []);
@@ -60,14 +60,17 @@ const Mypage: NextPage<Props> = ({ result, errorCode }) => {
         </div>
         <div className="container  lg:flex lg:flex-col mx-auto lg:max-w-md mt-6 mr-2 shadow-md rounded-3xl  overflow-hidden dark:bg-gray-700">
           <div className="font-normal pl-5 text-lg font-bold bg-gray-400 text-gray-700 dark:bg-gray-800 dark:text-white">
-            <span>kubectl</span>
+            <span>kubernetes</span>
           </div>
           <div className="my-4">
             <div className="flex flex-col pl-4 pt-1">
               <span className="font-bold dark:text-white">Progress</span>
             </div>
             <div className="flex flex-col pl-4 pt-3 w-9/12 mx-auto">
-              <ProgressBar bgcolor={'#6a1b9a'} completed={kubectlCompleted} />
+              <ProgressBar
+                bgcolor={'#6a1b9a'}
+                completed={kubernetesCompleted}
+              />
             </div>
           </div>
         </div>

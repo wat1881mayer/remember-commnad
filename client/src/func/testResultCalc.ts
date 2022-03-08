@@ -3,10 +3,10 @@ import { CategorResult } from '../type/category-result';
 export const testResultCalc = (result: any): CategorResult => {
   let gitCompletedCount = 0;
   let dockerCompletedCount = 0;
-  let kubectlCompletedCount = 0;
+  let kubernetesCompletedCount = 0;
   let gitQuestions = 0;
   let dockerQuestions = 0;
-  let kubectlQuestions = 0;
+  let kubernetesQuestions = 0;
 
   if (result) {
     for (const question of result.questions) {
@@ -20,10 +20,10 @@ export const testResultCalc = (result: any): CategorResult => {
         if (question.answered) {
           dockerCompletedCount++;
         }
-      } else if (question.category === 'kubectl') {
-        kubectlQuestions++;
+      } else if (question.category === 'kubernetes') {
+        kubernetesQuestions++;
         if (question.answered) {
-          kubectlCompletedCount++;
+          kubernetesCompletedCount++;
         }
       }
     }
@@ -32,9 +32,9 @@ export const testResultCalc = (result: any): CategorResult => {
   const dockerCompletedRate = Math.trunc(
     (dockerCompletedCount / dockerQuestions) * 100
   );
-  const kubectlCompletedRate = Math.trunc(
-    (kubectlCompletedCount / kubectlQuestions) * 100
+  const kubernetesCompletedRate = Math.trunc(
+    (kubernetesCompletedCount / kubernetesQuestions) * 100
   );
 
-  return { gitCompletedRate, dockerCompletedRate, kubectlCompletedRate };
+  return { gitCompletedRate, dockerCompletedRate, kubernetesCompletedRate };
 };
